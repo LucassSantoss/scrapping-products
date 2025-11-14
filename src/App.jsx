@@ -7,26 +7,46 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await getScrappingResults("Samsung M54");
+  const [query, setQuery] = useState('Samsung M54')
 
-        setProducts(data.shopping_results || []);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+  async function fetchData(searchTerm) {
+    try {
+      setLoading(true)
+      setError(null)
+
+      const data = await getScrappingResults(searchTerm)
+      setProducts(data.shopping_results || [])
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
     }
-    fetchData();
-  }, []);
+  }
+
+  useEffect(() => {
+    fetchData(query)
+  }, [])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    fetchData(query)
+  }
 
   return (
     <>
       <div className='app'>
           
         <h1>Scrapping de produtos</h1>
+
+        <form onSubmit={handleSubmit} className="search-form">
+          <input
+            type="text"
+            placeholder="Buscar produto..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <button type="submit">Buscar</button>
+        </form>
 
         {loading && <p>Carregando...</p>}
 

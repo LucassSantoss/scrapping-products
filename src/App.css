@@ -25,3 +25,9 @@
   width: 100%;
   height: auto;
 }
+
+.search-form {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 8px;
+}
