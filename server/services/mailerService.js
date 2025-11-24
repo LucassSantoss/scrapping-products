@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 
-module.exports = async function sendAlertEmail(product, price, link) {
+module.exports = async function sendAlertEmail(title, text) {
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: process.env.EMAIL_PORT,
@@ -15,8 +15,8 @@ module.exports = async function sendAlertEmail(product, price, link) {
   await transporter.sendMail({
     from: `"Scraper" <${process.env.EMAIL_USER}>`,
     to: process.env.ALERT_TO,
-    subject: `Preço baixo encontrado: ${product}`,
-    text: `Produto: ${product}\nPreço: R$ ${price}\nLink: ${link}`
+    subject: title,
+    text: text
   });
 
   console.log("Email enviado!");
