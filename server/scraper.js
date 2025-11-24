@@ -10,11 +10,18 @@ module.exports = async function runScraper() {
   for (const item of products) {
     const { name, threshold } = item;
 
-    console.log(`\nBuscando: ${name}`);
+    console.log(`\n🔍 Buscando por: ${name} (threshold: R$${threshold})`);
 
-    const res = await axios.get('http://localhost:3001/search', {
+    const res = await axios.get('http://127.0.0.1:3001/search', {
       params: { q: name }
     });
+
+    if (res.status !== 200 || !res.data) {
+      console.log(`Erro ao buscar ${name}: Status ${res.status}`);
+      continue;
+    }
+
+    console.log(`Resposta recebida para ${name}:`, res.data);
 
     const data = res.data;
 
@@ -25,27 +32,27 @@ module.exports = async function runScraper() {
 
     const normalized = data.shopping_results.map(p => ({
       title: p.title,
-      link: p.link,
-      price: p.price
-        ? Number(p.price.replace(/[^\d,]/g, "").replace(",", "."))
-        : null
+      link: p.product_link,
+      price: p.extracted_price
     })).filter(p => p.price !== null);
 
     console.log(`Encontrados ${normalized.length} resultados para ${name}`);
 
     const below = normalized.filter(p => p.price < threshold);
 
+    console.log(below)
+    
     if (below.length > 0) {
-      const best = below.sort((a, b) => a.price - b.price)[0];
+      console.log(`Encontrados ${below.length} produtos abaixo do threshold:`);
 
-      console.log(`Preço baixo encontrado: ${best.title} por R$ ${best.price}`);
-
-      alerts.push({
-        product: name,
-        title: best.title,
-        price: best.price,
-        link: best.link,
-        threshold
+      below.forEach(p => {
+        alerts.push({
+          product: name,
+          title: p.title,
+          price: p.price,
+          link: p.link,
+          threshold
+        });
       });
 
     } else {

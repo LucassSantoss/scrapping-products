@@ -1,14 +1,6 @@
 [
   {
-    "name": "iphone 14",
-    "threshold": 2500
-  },
-  {
-    "name": "playstation 5",
-    "threshold": 3300
-  },
-  {
-    "name": "notebook gamer acer",
-    "threshold": 3800
+    "name": "Iphone 16",
+    "threshold": 3000
   }
 ]
