@@ -12,6 +12,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.layout {
+  display: flex;
+}
+
+.content {
+  margin-left: 350px; /* Largura do sidebar */
+  width: calc(100% - 240px);
+  padding: 30px;
+}
 
 a {
   font-weight: 500;

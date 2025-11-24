@@ -1,0 +1,79 @@
+.monitoring-container {
+  padding: 40px;
+  max-width: 900px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+  color: #f5f7fa;
+}
+
+.monitoring-info {
+  background: #f5f7fa;
+  padding: 16px 20px;
+  color: #222;
+  border-left: 4px solid #3b82f6;
+  border-radius: 6px;
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 25px;
+}
+
+.monitoring-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.monitoring-table th {
+  background: #1e293b;
+  color: #fff;
+  font-weight: bold;
+  padding: 14px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.monitoring-table td {
+  background: #fff;
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.monitoring-table tr:last-child td {
+  border-bottom: none;
+}
+
+.monitoring-table tr:nth-child(even) td {
+  background: #f9fafb;
+}
+
+/* Status */
+.status-below {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.status-ok {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.add-button {
+  margin-top: 25px;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background: #1e293b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+
+.add-button:hover {
+  background: #334155;
+}
